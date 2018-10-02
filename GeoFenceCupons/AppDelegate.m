@@ -20,6 +20,20 @@
     return YES;
 }
 
+-(void) application:(UIApplication *)application didReceiveLocalNotification:(nonnull UILocalNotification *)notification {
+    
+    application.applicationIconBadgeNumber = 0;
+    
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"My Business Savings" message:notification.alertBody preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *alertAction = [UIAlertAction actionWithTitle:@"Okay" style:UIAlertActionStyleDefault handler:nil];
+    
+    [alertController addAction:alertAction];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [application.keyWindow.rootViewController presentViewController:alertController animated:YES completion:nil];
+    });
+}
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
